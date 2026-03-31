@@ -1,0 +1,100 @@
+<!-- -----------------------------------------------------------------------------
+Project: CoreStream - Multimedia Asset Safeguarding Framework
+File: player.html
+Author: Arnau Taberner García
+Copyright (c) 2025-2026 Arnau Taberner García. All rights reserved.
+
+License: PolyForm Noncommercial License 1.0.0
+This software is licensed for non-commercial, educational, and 
+research purposes only. Commercial use is strictly prohibited without 
+a separate commercial license from the author.
+
+Documentation & Legal: https://github.com/arnauquest/CoreStream
+----------------------------------------------------------------------------- -->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CoreStream Player</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #2c3e50, #4ca1af);
+      color: #fff;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    video {
+      border: 5px solid #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    footer {
+      margin-top: 20px;
+      font-size: 0.9em;
+    }
+  </style>
+  <!-- Shaka Player compiled library: -->
+  <script src="../lib/shaka/shaka-player.compiled.js"></script>
+  <script>
+    async function initPlayer() {
+      // Install polyfills
+      shaka.polyfill.installAll();
+
+      const video = document.getElementById('video');
+      const player = new shaka.Player(video);
+
+      try {
+        // Fetch DRM keys dynamically from cdm_bridge.py
+        const response = await fetch('http://localhost:5000/license');
+        if (!response.ok) {
+          throw new Error('Failed to fetch DRM keys');
+        }
+
+        const keys = await response.json();
+
+        // Configure DRM with fetched keys
+        player.configure({
+          drm: {
+            clearKeys: keys
+          }
+        });
+
+        // Load the video manifest
+        await player.load('https://example.com/path/to/360video/manifest.mpd');
+
+        // Play the video
+        video.play();
+        console.log('Video is playing with DRM enabled.');
+      } catch (error) {
+        console.error('Error initializing player:', error);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', initPlayer);
+  </script>
+</head>
+<body>
+  <h1>Welcome to CoreStream Player</h1>
+  <video id="video"
+         width="640"
+         poster="//shaka-player-demo.appspot.com/assets/poster.jpg"
+         controls autoplay>
+  </video>
+  <footer>
+    &copy; 2026 CoreStream. All rights reserved.
+  </footer>
+</body>
+</html>

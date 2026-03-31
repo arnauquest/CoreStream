@@ -1,0 +1,184 @@
+<!-- -----------------------------------------------------------------------------
+Project: CoreStream - Multimedia Asset Safeguarding Framework
+File: index.html
+Author: Arnau Taberner García
+Copyright (c) 2025-2026 Arnau Taberner García. All rights reserved.
+
+License: PolyForm Noncommercial License 1.0.0
+This software is licensed for non-commercial, educational, and 
+research purposes only. Commercial use is strictly prohibited without 
+a separate commercial license from the author.
+
+Documentation & Legal: https://github.com/arnauquest/CoreStream
+----------------------------------------------------------------------------- -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CoreStream - Your Streaming Platform</title>
+  <style>
+    /* General Styles */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #121212;
+      color: #fff;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      background-color: #1f1f1f;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    header .logo {
+      font-size: 1.5em;
+      font-weight: bold;
+      color: #4ca1af;
+    }
+
+    nav {
+      display: flex;
+      gap: 15px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #fff;
+      font-size: 1em;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #4ca1af;
+    }
+
+    /* Hero Section */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      height: 70vh;
+      background: linear-gradient(to bottom, #2c3e50, #4ca1af);
+      color: #fff;
+    }
+
+    .hero h1 {
+      font-size: 3em;
+      margin: 0.5em 0;
+    }
+
+    .hero p {
+      font-size: 1.2em;
+      margin: 0.5em 0 1.5em;
+    }
+
+    .hero button {
+      padding: 10px 20px;
+      font-size: 1em;
+      color: #fff;
+      background-color: #4ca1af;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .hero button:hover {
+      background-color: #3b8d99;
+    }
+
+    /* Content Section */
+    .content {
+      padding: 20px;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .gallery-item {
+      background-color: #1f1f1f;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s;
+    }
+
+    .gallery-item:hover {
+      transform: scale(1.05);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      display: block;
+    }
+
+    .gallery-item h3 {
+      margin: 10px;
+      font-size: 1.2em;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 10px;
+      background-color: #1f1f1f;
+      color: #fff;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">CoreStream</div>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Welcome to CoreStream</h1>
+    <p>Your gateway to secure and seamless streaming.</p>
+    <button>Start Watching</button>
+  </section>
+
+  <section class="content">
+    <h2>Featured Content</h2>
+    <div class="gallery">
+      <div class="gallery-item">
+        <img src="https://via.placeholder.com/200x300" alt="Content 1">
+        <h3>Movie Title 1</h3>
+      </div>
+      <div class="gallery-item">
+        <img src="https://via.placeholder.com/200x300" alt="Content 2">
+        <h3>Movie Title 2</h3>
+      </div>
+      <div class="gallery-item">
+        <img src="https://via.placeholder.com/200x300" alt="Content 3">
+        <h3>Movie Title 3</h3>
+      </div>
+      <div class="gallery-item">
+        <img src="https://via.placeholder.com/200x300" alt="Content 4">
+        <h3>Movie Title 4</h3>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2026 CoreStream. All rights reserved.
+  </footer>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!-- -----------------------------------------------------------------------------
+Project: CoreStream - Multimedia Asset Safeguarding Framework
+File: mvp360.html
+Author: Arnau Taberner García
+Copyright (c) 2025-2026 Arnau Taberner García. All rights reserved.
+
+License: PolyForm Noncommercial License 1.0.0
+This software is licensed for non-commercial, educational, and 
+research purposes only. Commercial use is strictly prohibited without 
+a separate commercial license from the author.
+
+Documentation & Legal: https://github.com/arnauquest/CoreStream
+----------------------------------------------------------------------------- -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CoreStream - MVP Test</title>
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script src="./lib/shaka/shaka-player.compiled.js"></script>
+    <style>
+      body { margin: 0; overflow: hidden; background-color: #000; }
+    </style>
+  </head>
+  <body>
+    <a-scene>
+      <a-videosphere src="#video360" rotation="0 -90 0"></a-videosphere>
+      
+      <a-camera>
+        <a-cursor color="#FFF"></a-cursor>
+      </a-camera>
+
+      <video id="video360" crossorigin="anonymous" playsinline style="display:none" muted></video>
+    </a-scene>
+
+    <script>
+      async function initApp() {
+        // 1. Instalar pollyfills para asegurar compatibilidad
+        shaka.polyfill.installAll();
+
+        const video = document.getElementById('video360');
+        const player = new shaka.Player(video);
+
+        try {
+          // 2. Obtener claves DRM dinámicamente desde cdm_bridge.py
+          const response = await fetch('http://localhost:5000/license');
+          if (!response.ok) {
+            throw new Error('Error al obtener las claves DRM');
+          }
+
+          const keys = await response.json();
+
+          // 3. Configuración de DRM con las claves obtenidas
+          player.configure({
+            drm: {
+              clearKeys: keys
+            }
+          });
+
+          // 4. Cargar el manifiesto del video 360° protegido
+          await player.load('https://example.com/path/to/360video/manifest.mpd');
+
+          // 5. Reproducir el video
+          video.play();
+          console.log('¡Bingo! El stream 360 con DRM está corriendo.');
+        } catch (error) {
+          console.error('Error cargando el stream:', error);
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', initApp);
+    </script>
+  </body>
+</html>
